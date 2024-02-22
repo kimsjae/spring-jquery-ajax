@@ -33,12 +33,11 @@ public class BoardRepository {
     }
 
     @Transactional
-    public void insert(String title, String content, String author){
+    public void insert(BoardRequest.WriteDTO writeDTO){
         Query query = em.createNativeQuery("insert into board_tb(title, content, author) values(?, ?, ?)");
-        query.setParameter(1, title);
-        query.setParameter(2, content);
-        query.setParameter(3, author);
-
+        query.setParameter(1, writeDTO.getTitle());
+        query.setParameter(2, writeDTO.getContent());
+        query.setParameter(3, writeDTO.getAuthor());
         query.executeUpdate();
     }
 

@@ -2,10 +2,7 @@ package shop.mtcoding.blog.board;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,12 @@ public class BoardApiController {
         }
 
         boardRepository.deleteById(id);
+        return new ApiUtil<>(null);
+    }
+
+    @PostMapping("/api/boards")
+    public ApiUtil<?> write(@RequestBody BoardRequest.WriteDTO writeDTO) {
+        boardRepository.insert(writeDTO);
         return new ApiUtil<>(null);
     }
 }
