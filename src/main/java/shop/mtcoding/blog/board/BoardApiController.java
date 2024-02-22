@@ -35,4 +35,10 @@ public class BoardApiController {
         boardRepository.insert(writeDTO);
         return new ApiUtil<>(null);
     }
+
+    @PutMapping("/api/boards/{id}")
+    public ApiUtil<?> updateById(@RequestBody BoardRequest.WriteDTO writeDTO, @PathVariable Integer id) {
+        boardRepository.updateById(writeDTO, id);
+        return new ApiUtil<>(null);
+    }
 }
